@@ -1,12 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import app from './reducers';
-
-import { createEpicMiddleware } from 'redux-observable';
-import fetchUserEpic from './epic';
-
-const epicMiddleware = createEpicMiddleware(fetchUserEpic);
+import promiseMiddleware from 'redux-promise-middleware';
 
 export default function configureStore () {
-  const store = createStore(app, applyMiddleware(epicMiddleware));
+  const store = createStore(app, applyMiddleware(promiseMiddleware()));
   return store;
 };
