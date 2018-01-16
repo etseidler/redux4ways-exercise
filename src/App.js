@@ -4,9 +4,27 @@ import { connect } from 'react-redux';
 import { fetchData } from './actions';
 
 const App = (props) => (
-  <div>
-    <p>Redux Examples</p>
-      <p>Load Data</p>
+  <div className="container App">
+      <div className="App-title">Redux Examples</div>
+      <div
+        onClick={() => props.fetchData()}
+        className="load-data-button"
+      >Load Data</div>
+    <div>
+      {
+        props.appData.isFetching && <div>Loading...</div>
+      }
+      {
+        props.appData.data.length ? (
+          props.appData.data.map((person, i) => {
+            return <div key={i}>
+              <div>Name: {person.name}</div>
+              <div>Age: {person.age}</div>
+            </div>
+          })
+        ) : null
+      }
+    </div>
   </div>
 );
 
